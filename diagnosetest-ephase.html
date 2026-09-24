@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Diagnosetest: Wo stehe ich? · Biologie</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+<style>:root{
+  --paper:#ffffff; --ink:#1e2b3a; --muted:#5a6878; --rule:#d5dce3; --soft:#f2f5f7;
+  --leaf:#2f7d4f; --leaf-soft:#e3f1e8; --ok:#2f7d4f; --mid:#b7791f; --low:#b3413a;
+  --mid-soft:#fbf1dc; --low-soft:#f8e3e1;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#162028; --ink:#e6ecf1; --muted:#a3b1bf; --rule:#34434f; --soft:#1e2a34;
+    --leaf:#6cc08f; --leaf-soft:#1f3a2b; --ok:#6cc08f; --mid:#e0a84a; --low:#e07a72;
+    --mid-soft:#3a2f1a; --low-soft:#3d2220;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#162028; --ink:#e6ecf1; --muted:#a3b1bf; --rule:#34434f; --soft:#1e2a34;
+  --leaf:#6cc08f; --leaf-soft:#1f3a2b; --ok:#6cc08f; --mid:#e0a84a; --low:#e07a72;
+  --mid-soft:#3a2f1a; --low-soft:#3d2220;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.5;-webkit-text-size-adjust:100%}
+main{max-width:44rem;margin:0 auto;padding:1.25rem 1.1rem 5rem}
+h1{font-size:1.9rem;line-height:1.15;margin:.4rem 0 .6rem}
+h2{font-size:1.3rem;margin:1.2rem 0 .6rem}
+p{margin:.4rem 0 .8rem}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.btn{background:var(--leaf);color:var(--paper);border:0;border-radius:8px;padding:.7rem 1.2rem;font-weight:700;min-height:44px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--rule)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.opt input:focus-visible + span{outline:3px solid var(--leaf);outline-offset:2px}
+.facts{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 1.4rem;padding:0;list-style:none}
+.facts li{background:var(--leaf-soft);border-radius:999px;padding:.25rem .8rem;font-size:.9rem;font-weight:600}
+.note{background:var(--soft);border-left:4px solid var(--leaf);padding:.75rem 1rem;margin:1rem 0;border-radius:0 6px 6px 0}
+.note p{margin:.25rem 0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--paper);padding:.6rem 0 .5rem;z-index:2;border-bottom:1px solid var(--rule);margin-bottom:1rem}
+.bar{height:6px;background:var(--soft);border-radius:3px;overflow:hidden;margin-top:.4rem}
+.bar i{display:block;height:100%;background:var(--leaf);transition:width .2s}
+@media (prefers-reduced-motion: reduce){.bar i{transition:none}}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.95rem}
+.tag{display:inline-block;background:var(--leaf);color:var(--paper);font-weight:700;border-radius:4px;padding:0 .45rem;margin-right:.4rem;font-size:.85rem}
+.prompt{font-size:1.1rem;font-weight:600;margin:.6rem 0 1rem}
+figure{margin:.5rem 0 1rem}
+svg{max-width:100%;height:auto;display:block}
+.opt{display:flex;gap:.7rem;align-items:flex-start;border:2px solid var(--rule);border-radius:8px;padding:.65rem .8rem;margin:.45rem 0;cursor:pointer;min-height:44px}
+.opt input{margin-top:.25rem;width:1.15rem;height:1.15rem;accent-color:var(--leaf);flex:none}
+.opt:has(input:checked){border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.dk span{color:var(--muted);font-style:italic}
+.row{display:grid;grid-template-columns:1fr minmax(8rem,auto);gap:.6rem;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--rule)}
+select{width:100%;min-height:44px;border:2px solid var(--rule);border-radius:8px;padding:.4rem .5rem;background:var(--paper)}
+input[type=text]{width:100%;min-height:44px;border:2px solid var(--rule);border-radius:8px;padding:.5rem .7rem;background:var(--paper)}
+textarea{width:100%;min-height:9rem;border:2px solid var(--rule);border-radius:8px;padding:.6rem .7rem;background:var(--paper);resize:vertical}
+.tf{display:grid;grid-template-columns:1fr auto auto;gap:.3rem .8rem;align-items:center}
+.tf .h{font-size:.85rem;color:var(--muted);font-weight:700;text-align:center}
+.tf label{display:flex;justify-content:center;min-width:44px;min-height:44px;align-items:center}
+.tf input{width:1.2rem;height:1.2rem;accent-color:var(--leaf)}
+.tf .s{padding:.45rem 0;border-bottom:1px solid var(--rule)}
+.gridq{overflow-x:auto}
+.gridq table{border-collapse:collapse;width:100%;min-width:30rem}
+.gridq th,.gridq td{border-bottom:1px solid var(--rule);padding:.45rem;text-align:left;vertical-align:middle}
+.gridq th{font-size:.85rem;color:var(--muted)}
+.blank{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center;margin:.4rem 0}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--rule);padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom,0px))}
+.nav .in{max-width:44rem;margin:0 auto;display:flex;justify-content:space-between;gap:.6rem}
+.overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.2rem,1fr));gap:.5rem;margin:1rem 0}
+.overview button{border:2px solid var(--rule);background:var(--paper);border-radius:8px;min-height:44px;font-weight:700}
+.overview button.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.self{border:2px solid var(--rule);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
+.own{background:var(--soft);border-radius:6px;padding:.6rem .8rem;white-space:pre-wrap;margin:.4rem 0 .8rem;min-height:2.2rem}
+.lights{display:grid;gap:.7rem;margin:1rem 0}
+.light{display:grid;grid-template-columns:auto 1fr;gap:.9rem;border-radius:10px;padding:.8rem 1rem;border:2px solid var(--rule)}
+.light .dot{width:1.6rem;height:1.6rem;border-radius:50%;margin-top:.15rem}
+.light.g{background:var(--leaf-soft);border-color:var(--ok)} .light.g .dot{background:var(--ok)}
+.light.y{background:var(--mid-soft);border-color:var(--mid)} .light.y .dot{background:var(--mid)}
+.light.r{background:var(--low-soft);border-color:var(--low)} .light.r .dot{background:var(--low)}
+.light h3{margin:0;font-size:1.05rem}
+.light p{margin:.2rem 0}
+.review{border-top:1px solid var(--rule);padding:.7rem 0}
+.review .res{font-weight:700;white-space:nowrap}
+.review .sol{color:var(--muted);font-size:.95rem}
+.hidden{display:none!important}
+@media print{
+  .nav,.noprint{display:none!important}
+  main{max-width:none;padding:0}
+  .light,.tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+<nav id="nav" class="nav hidden" aria-label="Navigation"></nav>
+<noscript><p style="padding:1rem">Bitte JavaScript aktivieren, um den Test zu bearbeiten.</p></noscript>
+<script>window.QUIZ = {"short": "Diagnosetest E-Phase", "kicker": "Biologie · Start in Klasse 11", "title": "Diagnosetest: Wo stehe ich?", "minutes": 20, "intro": "Dieser Test prüft Grundwissen aus der Mittelstufe, das du im Biologieunterricht der E-Phase brauchst. Er zeigt dir, wo du schon sicher bist und was du in den ersten Wochen auffrischen solltest.", "advice": {"g": "Dieses Wissen sitzt. Im Unterricht bekommst du hier Anwendungs- und Vertiefungsaufgaben.", "y": "Einiges sitzt, manches ist unsicher. Frische den Block mit dem Wissensspeicher auf und bearbeite eine Übungsaufgabe dazu.", "r": "Hier fehlen noch Grundlagen. Kein Problem: Genau daran arbeiten wir in den nächsten Wochen gemeinsam. Sag deiner Lehrkraft gern, dass dieser Block für dich rot ist."}, "blocks": {"A": {"name": "Grundlagen des Lebendigen", "green": 2, "yellow": 1, "topics": "Kennzeichen des Lebens, Organisationsebenen von Molekül bis Organismus, Zelle als kleinste Einheit des Lebens", "max": 2}, "B": {"name": "Die Zelle", "green": 7.5, "yellow": 4.5, "topics": "Tier- und Pflanzenzelle, Aufgaben der Zellbestandteile, Bakterienzelle ohne Zellkern, Größenordnungen (mm, µm, nm), Mikroskop und Gesamtvergrößerung", "max": 9}, "C": {"name": "Stoffe in Lebewesen", "green": 5, "yellow": 3, "topics": "Nährstoffe und ihre Bausteine (Aminosäuren, Glucose), Enzyme bei der Verdauung, Diffusion und Konzentration", "max": 6}, "D": {"name": "Stoff- und Energieumwandlung", "green": 2, "yellow": 1, "topics": "Wortgleichungen von Fotosynthese und Zellatmung", "max": 2}, "E": {"name": "Der menschliche Körper", "green": 3, "yellow": 2, "topics": "Zusammenspiel von Verdauung, Atmung und Kreislauf, Blutbestandteile, Bakterien und Viren, Antibiotika, Impfung", "max": 3}, "F": {"name": "Erbinformation", "green": 2, "yellow": 1, "topics": "DNA und Chromosomen im Zellkern, Gen als DNA-Abschnitt, Mitose", "max": 2}, "G": {"name": "Naturwissenschaftlich arbeiten", "green": 3, "yellow": 2, "topics": "Hypothese und Variablen im Experiment, Diagramme lesen, Operatoren wie nennen, beschreiben, erklären", "max": 3}}, "items": [{"block": "A", "points": 1, "type": "single", "prompt": "Welches ist <em>kein<\/em> Kennzeichen von Lebewesen?", "options": ["Stoffwechsel", "Fortpflanzung", "Reizbarkeit", "Feste Farbe"], "correct": 3, "solution": "Feste Farbe", "id": "q0", "label": "1"}, {"block": "A", "points": 1, "type": "order", "prompt": "Bringe die Organisationsebenen in die richtige Reihenfolge, von der kleinsten zur größten.", "items": ["Organ", "Zelle", "Organismus", "Gewebe", "Organsystem"], "correct": [3, 1, 5, 2, 4], "solution": "Zelle – Gewebe – Organ – Organsystem – Organismus", "id": "q1", "label": "2"}, {"block": "B", "points": 2, "type": "match", "prompt": "Die Abbildung zeigt eine Pflanzenzelle. Benenne die Strukturen 1 bis 4.", "figure": "<svg viewBox=\"0 0 520 250\" role=\"img\" aria-label=\"Schema einer Pflanzenzelle mit den Nummern 1 bis 4\"><rect x=\"20\" y=\"20\" width=\"300\" height=\"210\" rx=\"10\" fill=\"none\" stroke=\"var(--leaf)\" stroke-width=\"8\"/><rect x=\"30\" y=\"30\" width=\"280\" height=\"190\" rx=\"6\" fill=\"none\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><rect x=\"110\" y=\"55\" width=\"180\" height=\"140\" rx=\"40\" fill=\"var(--leaf-soft)\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><circle cx=\"70\" cy=\"80\" r=\"24\" fill=\"none\" stroke=\"var(--ink)\" stroke-width=\"2\"/><circle cx=\"70\" cy=\"80\" r=\"8\" fill=\"var(--ink)\"/><ellipse cx=\"60\" cy=\"170\" rx=\"18\" ry=\"9\" fill=\"var(--leaf)\"/><ellipse cx=\"90\" cy=\"200\" rx=\"18\" ry=\"9\" fill=\"var(--leaf)\"/><ellipse cx=\"80\" cy=\"130\" rx=\"12\" ry=\"6\" fill=\"none\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><g stroke=\"var(--muted)\" stroke-width=\"1.5\" fill=\"none\"><line x1=\"316\" y1=\"120\" x2=\"400\" y2=\"120\"/><polyline points=\"70,56 70,8 400,8\"/><line x1=\"108\" y1=\"200\" x2=\"400\" y2=\"205\"/><line x1=\"240\" y1=\"150\" x2=\"400\" y2=\"165\"/><\/g><g font-family=\"system-ui,sans-serif\" font-size=\"20\" font-weight=\"700\" fill=\"var(--ink)\"><text x=\"408\" y=\"14\">2<\/text><text x=\"408\" y=\"126\">1<\/text><text x=\"408\" y=\"171\">4<\/text><text x=\"408\" y=\"211\">3<\/text><\/g><\/svg>", "options": ["Zellwand", "Zellmembran", "Zellkern", "Chloroplast", "Mitochondrium", "Vakuole"], "rows": [{"label": "Struktur 1", "correct": "Zellwand"}, {"label": "Struktur 2", "correct": "Zellkern"}, {"label": "Struktur 3", "correct": "Chloroplast"}, {"label": "Struktur 4", "correct": "Vakuole"}], "solution": "1 Zellwand, 2 Zellkern, 3 Chloroplast, 4 Vakuole", "id": "q2", "label": "3"}, {"block": "B", "points": 3, "type": "match", "prompt": "Ordne jeder Struktur ihre Hauptaufgabe zu.", "options": ["grenzt die Zelle ab und kontrolliert den Stoffaustausch", "enthält die Erbinformation und steuert die Zelle", "stellt durch Zellatmung Energie bereit"], "rows": [{"label": "Mitochondrium", "correct": "stellt durch Zellatmung Energie bereit"}, {"label": "Zellmembran", "correct": "grenzt die Zelle ab und kontrolliert den Stoffaustausch"}, {"label": "Zellkern", "correct": "enthält die Erbinformation und steuert die Zelle"}], "solution": "Mitochondrium: Energie durch Zellatmung; Zellmembran: Abgrenzung und Stoffaustausch; Zellkern: Erbinformation und Steuerung", "id": "q3", "label": "4"}, {"block": "B", "points": 1, "type": "multi", "prompt": "Welche Strukturen besitzt eine menschliche Zelle <em>nicht<\/em>?", "options": ["Zellwand", "Zellkern", "Chloroplasten", "Mitochondrien"], "correct": [0, 2], "solution": "Zellwand und Chloroplasten (nur beide zusammen zählen)", "id": "q4", "label": "5"}, {"block": "B", "points": 1, "type": "single", "prompt": "Bakterien unterscheiden sich von Tier- und Pflanzenzellen vor allem dadurch, dass sie …", "options": ["keine Zellmembran haben.", "keinen Zellkern haben.", "nicht wachsen können.", "keine Erbinformation haben."], "correct": 1, "solution": "… keinen Zellkern haben.", "id": "q5", "label": "6"}, {"block": "B", "points": 1, "type": "single", "prompt": "Eine typische menschliche Zelle ist ungefähr so groß:", "options": ["2 cm", "1 mm", "20 µm", "20 nm"], "correct": 2, "solution": "20 µm", "id": "q6", "label": "7"}, {"block": "B", "points": 1, "type": "number", "prompt": "Okular 10-fach, Objektiv 40-fach. Wie groß ist die Gesamtvergrößerung?", "label": "8", "range": [400, 400], "solution": "400-fach (Okular × Objektiv)", "id": "q7"}, {"block": "C", "points": 1, "type": "single", "prompt": "Proteine sind aus … aufgebaut.", "options": ["Glucose", "Aminosäuren", "Fettsäuren", "Vitaminen"], "correct": 1, "solution": "Aminosäuren", "id": "q8", "label": "9"}, {"block": "C", "points": 1, "type": "single", "prompt": "Stärke ist …", "options": ["ein Protein.", "ein Fett.", "ein Kohlenhydrat aus Glucose-Bausteinen.", "ein Mineralstoff."], "correct": 2, "solution": "ein Kohlenhydrat aus Glucose-Bausteinen", "id": "q9", "label": "10"}, {"block": "C", "points": 1, "type": "single", "prompt": "Welcher Nährstoff dient vor allem als Baustoff, zum Beispiel für Muskeln?", "options": ["Kohlenhydrate", "Fette", "Proteine", "Wasser"], "correct": 2, "solution": "Proteine", "id": "q10", "label": "11"}, {"block": "C", "points": 1, "type": "text", "prompt": "Wie heißen die Stoffe im Speichel und in den Verdauungssäften, die Nährstoffe in kleine Bausteine zerlegen?", "blanks": [{"label": "Antwort:", "accept": ["enzym"]}], "solution": "Enzyme (auch: Verdauungsenzyme)", "id": "q11", "label": "12"}, {"block": "C", "points": 2, "type": "open", "prompt": "Ein Tropfen Tinte verteilt sich in einem Glas Wasser nach einiger Zeit von selbst. Erkläre das mithilfe des Teilchenmodells.", "criteria": [{"text": "Die Teilchen bewegen sich ständig und ungeordnet (Eigenbewegung).", "points": 1}, {"text": "Dadurch verteilen sie sich von Orten hoher zu Orten niedriger Konzentration, bis sie gleichmäßig verteilt sind.", "points": 1}], "solution": "Teilchen bewegen sich ständig ungeordnet; dadurch verteilen sie sich von hoher zu niedriger Konzentration, bis sie gleichmäßig verteilt sind (Diffusion).", "id": "q12", "label": "13"}, {"block": "D", "points": 1, "type": "text", "prompt": "Ergänze die Wortgleichung der Fotosynthese.", "template": "Kohlenstoffdioxid + {0} → (Licht) → Glucose + {1}", "blanks": [{"accept": ["^wasser$", "^h2o$"]}, {"accept": ["^sauerstoff$", "^o2$"]}], "solution": "Kohlenstoffdioxid + Wasser → Glucose + Sauerstoff", "id": "q13", "label": "14"}, {"block": "D", "points": 1, "type": "text", "prompt": "Ergänze die Wortgleichung der Zellatmung.", "template": "Glucose + Sauerstoff → {0} + {1} (+ Energie)", "unordered": true, "blanks": [{"accept": ["^kohlenstoffdioxid$", "^kohlendioxid$", "^co2$", "^co₂$"]}, {"accept": ["^wasser$", "^h2o$"]}], "solution": "Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser (+ Energie)", "id": "q14", "label": "15"}, {"block": "E", "points": 1, "type": "single", "prompt": "Rote Blutzellen transportieren vor allem …", "options": ["Nährstoffe.", "Sauerstoff.", "Antikörper.", "Hormone."], "correct": 1, "solution": "Sauerstoff", "id": "q15", "label": "16"}, {"block": "E", "points": 1, "type": "single", "prompt": "Antibiotika helfen gegen …", "options": ["Viren.", "Bakterien.", "Viren und Bakterien.", "keins von beiden."], "correct": 1, "solution": "Bakterien", "id": "q16", "label": "17"}, {"block": "E", "points": 1, "type": "single", "prompt": "Was passiert grundsätzlich bei einer Impfung?", "options": ["Die Erreger im Körper werden sofort abgetötet.", "Das Immunsystem lernt einen Erreger kennen, ohne dass man erkrankt.", "Man bekommt vorbeugend Antibiotika."], "correct": 1, "solution": "Das Immunsystem lernt einen Erreger kennen, ohne dass man erkrankt.", "id": "q17", "label": "18"}, {"block": "F", "points": 1, "type": "single", "prompt": "Wo liegt die Erbinformation in einer menschlichen Zelle?", "options": ["in der Zellmembran", "in den Chromosomen im Zellkern", "in der Vakuole", "im Blut"], "correct": 1, "solution": "in den Chromosomen im Zellkern", "id": "q18", "label": "19"}, {"block": "F", "points": 1, "type": "single", "prompt": "Nach einer normalen Zellteilung (Mitose) haben die Tochterzellen …", "options": ["die gleiche Erbinformation wie die Ausgangszelle.", "jeweils die Hälfte der Erbinformation.", "neue, zufällig gemischte Erbinformation."], "correct": 0, "solution": "die gleiche Erbinformation wie die Ausgangszelle", "id": "q19", "label": "20"}, {"block": "G", "points": 1, "type": "single", "prompt": "Kressesamen werden bei 5 °C, 15 °C und 25 °C ausgesät. Nach 5 Tagen wird gezählt, wie viele gekeimt sind. Welches ist die unabhängige Variable?", "options": ["Anzahl gekeimter Samen", "Temperatur", "Dauer von 5 Tagen", "Sorte der Samen"], "correct": 1, "solution": "Temperatur (sie wird gezielt verändert)", "id": "q20", "label": "21"}, {"block": "G", "points": 1, "type": "single", "prompt": "Bei welchem Operator musst du Ursachen oder Gründe für einen Sachverhalt angeben?", "options": ["nennen", "beschreiben", "erklären"], "correct": 2, "solution": "erklären", "id": "q21", "label": "22"}, {"block": "G", "points": 1, "type": "number", "prompt": "Ab welcher Lichtstärke steigt die Sauerstoffabgabe der Wasserpflanze nicht mehr deutlich an?", "figure": "<svg viewBox=\"0 0 460 250\" role=\"img\" aria-label=\"Liniendiagramm: Sauerstoffabgabe steigt mit der Lichtstärke und bleibt ab etwa 30 Kilolux fast gleich\"><g font-family=\"system-ui,sans-serif\" font-size=\"13\" fill=\"var(--ink)\"><g stroke=\"var(--rule)\" stroke-width=\"1\"><line x1=\"60\" y1=\"160\" x2=\"430\" y2=\"160\"/><line x1=\"60\" y1=\"120\" x2=\"430\" y2=\"120\"/><line x1=\"60\" y1=\"80\" x2=\"430\" y2=\"80\"/><line x1=\"60\" y1=\"40\" x2=\"430\" y2=\"40\"/><\/g><line x1=\"60\" y1=\"200\" x2=\"430\" y2=\"200\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><line x1=\"60\" y1=\"200\" x2=\"60\" y2=\"20\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><text x=\"56\" y=\"204\" text-anchor=\"end\">0<\/text><text x=\"56\" y=\"164\" text-anchor=\"end\">20<\/text><text x=\"56\" y=\"124\" text-anchor=\"end\">40<\/text><text x=\"56\" y=\"84\" text-anchor=\"end\">60<\/text><text x=\"56\" y=\"44\" text-anchor=\"end\">80<\/text><text x=\"60\" y=\"218\" text-anchor=\"middle\">0<\/text><text x=\"130\" y=\"218\" text-anchor=\"middle\">10<\/text><text x=\"200\" y=\"218\" text-anchor=\"middle\">20<\/text><text x=\"270\" y=\"218\" text-anchor=\"middle\">30<\/text><text x=\"340\" y=\"218\" text-anchor=\"middle\">40<\/text><text x=\"410\" y=\"218\" text-anchor=\"middle\">50<\/text><text x=\"245\" y=\"242\" text-anchor=\"middle\">Lichtstärke in Kilolux<\/text><text x=\"18\" y=\"110\" text-anchor=\"middle\" transform=\"rotate(-90 18 110)\">O₂-Abgabe (Bläschen/min)<\/text><\/g><polyline points=\"60,200 130,120 200,60 270,30 340,28 410,28\" fill=\"none\" stroke=\"var(--leaf)\" stroke-width=\"3\" stroke-linejoin=\"round\"/><g fill=\"var(--leaf)\"><circle cx=\"60\" cy=\"200\" r=\"4\"/><circle cx=\"130\" cy=\"120\" r=\"4\"/><circle cx=\"200\" cy=\"60\" r=\"4\"/><circle cx=\"270\" cy=\"30\" r=\"4\"/><circle cx=\"340\" cy=\"28\" r=\"4\"/><circle cx=\"410\" cy=\"28\" r=\"4\"/><\/g><\/svg>", "label": "23", "range": [25, 35], "solution": "ca. 30 Kilolux (25–35 wird akzeptiert)", "id": "q22"}]};</script>
+<script>(function () {
+  "use strict";
+  const Q = window.QUIZ;
+  const app = document.getElementById("app");
+  const navEl = document.getElementById("nav");
+  // Alle Antworten liegen nur in dieser Variable im Arbeitsspeicher des Browsers.
+  // Es wird nichts gespeichert, gesendet oder protokolliert.
+  let S = { screen: "start", i: 0, ans: {}, self: {} };
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmt = (n) => (Math.round(n * 10) / 10).toString().replace(".", ",");
+  const items = Q.items;
+  const openItems = items.filter((it) => it.type === "open");
+  const taskCount = new Set(items.map((it) => String(it.label).replace(/[a-z]$/, ""))).size;
+
+  window.addEventListener("beforeunload", (e) => {
+    if (S.screen !== "start" && S.screen !== "result" && Object.keys(S.ans).length) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  function go(screen, i) { S.screen = screen; if (i !== undefined) S.i = i; render(); window.scrollTo(0, 0); const h = app.querySelector("h1,h2,.prompt"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); } }
+
+  // ---------- Antwortstatus ----------
+  function answered(it) {
+    const a = S.ans[it.id];
+    if (a === undefined || a === null) return false;
+    switch (it.type) {
+      case "single": return a !== undefined;
+      case "multi": return a.length > 0;
+      case "tf": return a.some((x) => x !== null && x !== undefined);
+      case "match": case "grid": return Object.values(a).some((v) => v !== "");
+      case "order": return a.some((v) => v);
+      case "text": return a.some((v) => v && v.trim());
+      case "number": case "open": return a.trim() !== "";
+    }
+    return false;
+  }
+
+  // ---------- Bewertung ----------
+  const norm = (s) => String(s || "").trim().toLowerCase().replace(/\s+/g, " ").replace(/[.,;!]+$/, "");
+  const matches = (val, patterns) => patterns.some((p) => new RegExp(p, "i").test(norm(val)));
+
+  function score(it) {
+    const a = S.ans[it.id];
+    const P = it.points;
+    switch (it.type) {
+      case "single": {
+        const ok = Array.isArray(it.correct) ? it.correct : [it.correct];
+        return ok.includes(a) ? P : 0;
+      }
+      case "multi": {
+        const sel = a || [];
+        if (it.pick) { const hits = sel.filter((x) => it.correct.includes(x)).length; return Math.min(P, hits * (P / it.pick)); }
+        const setOk = sel.length === it.correct.length && it.correct.every((x) => sel.includes(x));
+        return setOk ? P : 0;
+      }
+      case "tf": {
+        const per = P / it.statements.length;
+        return it.statements.reduce((s, st, k) => s + ((a || [])[k] === st.answer ? per : 0), 0);
+      }
+      case "match": {
+        const per = P / it.rows.length;
+        return it.rows.reduce((s, r, k) => s + ((a || {})[k] === r.correct ? per : 0), 0);
+      }
+      case "grid": {
+        const g = a || {};
+        const cellOk = (r, c) => { const cell = it.rows[r].cells[c]; const v = g[r + "-" + c]; return (Array.isArray(cell.correct) ? cell.correct : [cell.correct]).includes(v); };
+        if (it.scoring === "cell") {
+          const n = it.rows.reduce((s, r) => s + r.cells.length, 0);
+          let sum = 0; it.rows.forEach((r, ri) => r.cells.forEach((_, ci) => { if (cellOk(ri, ci)) sum += P / n; }));
+          return sum;
+        }
+        return it.rows.reduce((s, r, ri) => s + (r.cells.every((_, ci) => cellOk(ri, ci)) ? P / it.rows.length : 0), 0);
+      }
+      case "order": {
+        const pos = a || [];
+        return it.items.every((_, k) => Number(pos[k]) === it.correct[k]) ? P : 0;
+      }
+      case "text": {
+        const v = (a || []).map(norm);
+        if (it.unordered) {
+          const pool = [...v];
+          const ok = it.blanks.every((b) => { const idx = pool.findIndex((x) => matches(x, b.accept)); if (idx < 0) return false; pool.splice(idx, 1); return true; });
+          return ok ? P : 0;
+        }
+        return it.blanks.every((b, k) => matches(v[k], b.accept)) ? P : 0;
+      }
+      case "number": {
+        const m = String(a || "").replace(",", ".").match(/-?\d+(\.\d+)?/);
+        if (!m) return 0; const n = parseFloat(m[0]);
+        return n >= it.range[0] && n <= it.range[1] ? P : 0;
+      }
+      case "open": {
+        const chk = S.self[it.id] || [];
+        return it.criteria.reduce((s, c, k) => s + (chk[k] ? c.points : 0), 0);
+      }
+    }
+    return 0;
+  }
+
+  // ---------- Bausteine ----------
+  function topBar() {
+    const n = items.length;
+    return `<div class="top noprint"><div class="qhead"><span class="muted">${esc(Q.short)}</span><span>Schritt ${S.i + 1} von ${n}</span></div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${S.i + 1}"><i style="width:${((S.i + 1) / n) * 100}%"></i></div></div>`;
+  }
+  function setNav(html) { navEl.innerHTML = html ? `<div class="in">${html}</div>` : ""; navEl.classList.toggle("hidden", !html); }
+  const selectHtml = (name, opts, val, label) =>
+    `<select name="${name}" aria-label="${esc(label)}"><option value="">– bitte wählen –</option>${opts.map((o) => `<option value="${esc(o)}"${val === o ? " selected" : ""}>${esc(o)}</option>`).join("")}<option value="__dk"${val === "__dk" ? " selected" : ""}>weiß ich nicht</option></select>`;
+
+  function renderItem(it) {
+    const a = S.ans[it.id];
+    let body = "";
+    const id = it.id;
+    switch (it.type) {
+      case "single":
+        body = it.options.map((o, k) => `<label class="opt"><input type="radio" name="${id}" value="${k}"${a === k ? " checked" : ""}><span>${esc(o)}</span></label>`).join("")
+          + `<label class="opt dk"><input type="radio" name="${id}" value="dk"${a === "dk" ? " checked" : ""}><span>weiß ich nicht</span></label>`;
+        break;
+      case "multi":
+        body = (it.pick ? `<p class="muted small">Wähle genau ${it.pick} aus.</p>` : `<p class="muted small">Mehrere Antworten können richtig sein.</p>`)
+          + it.options.map((o, k) => `<label class="opt"><input type="checkbox" name="${id}" value="${k}"${(a || []).includes(k) ? " checked" : ""}><span>${esc(o)}</span></label>`).join("");
+        break;
+      case "tf":
+        body = `<div class="tf" role="group"><span></span><span class="h">richtig</span><span class="h">falsch</span>`
+          + it.statements.map((st, k) => `<span class="s">${esc(st.text)}</span>
+            <label><input type="radio" name="${id}-${k}" value="1"${(a || [])[k] === true ? " checked" : ""} aria-label="richtig: ${esc(st.text)}"></label>
+            <label><input type="radio" name="${id}-${k}" value="0"${(a || [])[k] === false ? " checked" : ""} aria-label="falsch: ${esc(st.text)}"></label>`).join("") + `</div>`;
+        break;
+      case "match":
+        body = it.rows.map((r, k) => `<div class="row"><span>${esc(r.label)}</span>${selectHtml(id + "-" + k, it.options, (a || {})[k], r.label)}</div>`).join("");
+        break;
+      case "order":
+        body = `<p class="muted small">Gib jedem Begriff seinen Platz (1 = kleinste Ebene).</p>` + it.items.map((t, k) =>
+          `<div class="row"><span>${esc(t)}</span><select name="${id}-${k}" aria-label="Platz für ${esc(t)}"><option value="">– Platz –</option>${it.items.map((_, p) => `<option value="${p + 1}"${String((a || [])[k]) === String(p + 1) ? " selected" : ""}>${p + 1}</option>`).join("")}</select></div>`).join("");
+        break;
+      case "grid":
+        body = `<div class="gridq"><table><thead><tr><th></th>${it.cols.map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>`
+          + it.rows.map((r, ri) => `<tr><th scope="row">${esc(r.label)}</th>${r.cells.map((c, ci) => `<td>${selectHtml(`${id}-${ri}-${ci}`, c.options, (a || {})[ri + "-" + ci], r.label + ", " + it.cols[ci])}</td>`).join("")}</tr>`).join("")
+          + `</tbody></table></div>`;
+        break;
+      case "text":
+        body = it.template ? `<p>${it.template.replace(/\{(\d+)\}/g, (_, n) => `<input type="text" name="${id}-${n}" value="${esc((a || [])[n] || "")}" aria-label="Lücke ${Number(n) + 1}" style="width:11rem;display:inline-block;margin:.2rem">`)}</p>`
+          : it.blanks.map((b, k) => `<div class="blank"><label for="${id}-${k}">${esc(b.label)}</label><input type="text" id="${id}-${k}" name="${id}-${k}" value="${esc((a || [])[k] || "")}" autocomplete="off"></div>`).join("");
+        break;
+      case "number":
+        body = `<div class="blank"><label for="${id}">${esc(it.label || "Antwort")}</label><input type="text" inputmode="decimal" id="${id}" name="${id}" value="${esc(a || "")}" autocomplete="off"></div>`;
+        break;
+      case "open":
+        body = `<label for="${id}" class="muted small">Deine Antwort in ganzen Sätzen. Nach dem Test vergleichst du sie selbst mit der Musterlösung.</label><textarea id="${id}" name="${id}">${esc(a || "")}</textarea>`;
+        break;
+    }
+    return `<div class="qhead"><span><span class="tag">${esc(it.block)}</span><strong>Aufgabe ${esc(it.label)}</strong></span><span class="muted">${fmt(it.points)} P</span></div>
+      <p class="prompt">${it.prompt}</p>${it.figure ? `<figure>${it.figure}</figure>` : ""}<form id="f" onsubmit="return false">${body}</form>`;
+  }
+
+  function readItem(it) {
+    const f = document.getElementById("f"); if (!f) return;
+    const val = (n) => { const el = f.elements[n]; return el ? el.value : ""; };
+    switch (it.type) {
+      case "single": { const c = f.querySelector("input:checked"); if (c) S.ans[it.id] = c.value === "dk" ? "dk" : Number(c.value); break; }
+      case "multi": S.ans[it.id] = [...f.querySelectorAll("input:checked")].map((x) => Number(x.value)); break;
+      case "tf": S.ans[it.id] = it.statements.map((_, k) => { const c = f.querySelector(`input[name="${it.id}-${k}"]:checked`); return c ? c.value === "1" : null; }); break;
+      case "match": { const o = {}; it.rows.forEach((_, k) => (o[k] = val(`${it.id}-${k}`))); S.ans[it.id] = o; break; }
+      case "order": S.ans[it.id] = it.items.map((_, k) => val(`${it.id}-${k}`)); break;
+      case "grid": { const o = {}; it.rows.forEach((r, ri) => r.cells.forEach((_, ci) => (o[ri + "-" + ci] = val(`${it.id}-${ri}-${ci}`)))); S.ans[it.id] = o; break; }
+      case "text": S.ans[it.id] = it.blanks.map((_, k) => val(`${it.id}-${k}`)); break;
+      case "number": case "open": S.ans[it.id] = val(it.id); break;
+    }
+    if (it.type === "multi" && it.pick) {
+      const boxes = [...f.querySelectorAll("input[type=checkbox]")];
+      const n = boxes.filter((b) => b.checked).length;
+      boxes.forEach((b) => (b.disabled = !b.checked && n >= it.pick));
+    }
+  }
+
+  // ---------- Bildschirme ----------
+  function render() {
+    if (S.screen === "start") {
+      app.innerHTML = `<p class="muted">${esc(Q.kicker)}</p><h1>${esc(Q.title)}</h1>
+        <ul class="facts"><li>${taskCount} Aufgaben</li><li>ca. ${Q.minutes} Minuten</li><li>keine Note</li><li>nichts wird gespeichert</li></ul>
+        <p>${Q.intro}</p>
+        <div class="note"><p><strong>So funktioniert es:</strong> Du beantwortest die Aufgaben nacheinander. ${openItems.length ? "Bei Aufgaben mit eigenem Text vergleichst du am Ende deine Antwort selbst mit der Musterlösung. " : ""}Danach siehst du für jeden Themenblock eine Ampel und was du wiederholen solltest.</p>
+        <p><strong>Wenn du etwas nicht weißt,</strong> wähle „weiß ich nicht“. Raten macht deine Ampeln ungenau.</p>
+        <p><strong>Datenschutz:</strong> Deine Antworten bleiben nur in diesem Browserfenster. Nichts wird gespeichert oder verschickt, auch deine Lehrkraft sieht nichts. Wenn du die Seite neu lädst oder schließt, ist alles weg.</p></div>
+        <button class="btn" id="start">Test starten</button>`;
+      setNav("");
+      app.querySelector("#start").onclick = () => go("q", 0);
+      return;
+    }
+    if (S.screen === "q") {
+      const it = items[S.i];
+      app.innerHTML = topBar() + renderItem(it);
+      const f = document.getElementById("f");
+      f.addEventListener("input", () => readItem(it)); f.addEventListener("change", () => readItem(it));
+      readItem(it);
+      setNav(`<button class="btn ghost" id="back"${S.i === 0 ? " disabled" : ""}>Zurück</button>
+        <button class="btn ghost" id="ov">Übersicht</button>
+        <button class="btn" id="next">${S.i === items.length - 1 ? "Fertig" : "Weiter"}</button>`);
+      navEl.querySelector("#back").onclick = () => go("q", S.i - 1);
+      navEl.querySelector("#ov").onclick = () => go("overview");
+      navEl.querySelector("#next").onclick = () => (S.i === items.length - 1 ? go("overview") : go("q", S.i + 1));
+      return;
+    }
+    if (S.screen === "overview") {
+      const open = items.filter((it) => !answered(it));
+      app.innerHTML = `<h1>Übersicht</h1><p>Grün markierte Aufgaben hast du bearbeitet. Tippe auf eine Nummer, um zurückzuspringen.</p>
+        <div class="overview">${items.map((it, k) => `<button data-k="${k}" class="${answered(it) ? "done" : ""}" aria-label="Aufgabe ${esc(it.label)}${answered(it) ? ", bearbeitet" : ", offen"}">${esc(it.label)}</button>`).join("")}</div>
+        ${open.length ? `<div class="note"><p>Noch offen: Aufgabe ${open.map((it) => esc(it.label)).join(", ")}. Offene Aufgaben zählen wie „weiß ich nicht“.</p></div>` : `<p>Alle Aufgaben sind bearbeitet.</p>`}`;
+      app.querySelectorAll(".overview button").forEach((b) => (b.onclick = () => go("q", Number(b.dataset.k))));
+      setNav(`<button class="btn ghost" id="back">Zurück zu den Aufgaben</button><button class="btn" id="eval">${openItems.length ? "Weiter zum Selbstcheck" : "Auswerten"}</button>`);
+      navEl.querySelector("#back").onclick = () => go("q", S.i);
+      navEl.querySelector("#eval").onclick = () => go(openItems.length ? "self" : "result");
+      return;
+    }
+    if (S.screen === "self") {
+      app.innerHTML = `<h1>Selbstcheck</h1><p>Vergleiche deine Antworten mit den Kriterien. Setze nur dann einen Haken, wenn der Punkt <strong>sinngemäß</strong> in deiner Antwort steht. Sei ehrlich zu dir: Es gibt keine Note, die Ampel soll dir nur zeigen, was du wiederholen solltest.</p>`
+        + openItems.map((it) => `<div class="self"><div class="qhead"><span><span class="tag">${esc(it.block)}</span><strong>Aufgabe ${esc(it.label)}</strong></span><span class="muted">${fmt(it.points)} P</span></div>
+          <p><strong>${it.prompt}</strong></p><p class="muted small">Deine Antwort:</p><div class="own"></div>
+          ${it.criteria.map((c, k) => `<label class="opt"><input type="checkbox" data-id="${it.id}" data-k="${k}"${(S.self[it.id] || [])[k] ? " checked" : ""}><span>${esc(c.text)} <span class="muted">(${fmt(c.points)} P)</span></span></label>`).join("")}</div>`).join("");
+      app.querySelectorAll(".self").forEach((box, k) => { const t = S.ans[openItems[k].id]; box.querySelector(".own").textContent = t && t.trim() ? t : "(keine Antwort)"; });
+      app.querySelectorAll("input[data-id]").forEach((cb) => (cb.onchange = () => { const arr = S.self[cb.dataset.id] || []; arr[Number(cb.dataset.k)] = cb.checked; S.self[cb.dataset.id] = arr; }));
+      setNav(`<button class="btn ghost" id="back">Zurück</button><button class="btn" id="eval">Auswerten</button>`);
+      navEl.querySelector("#back").onclick = () => go("overview");
+      navEl.querySelector("#eval").onclick = () => go("result");
+      return;
+    }
+    if (S.screen === "result") {
+      const byBlock = {};
+      Object.keys(Q.blocks).forEach((b) => (byBlock[b] = { pts: 0, max: 0 }));
+      items.forEach((it) => { byBlock[it.block].pts += score(it); byBlock[it.block].max += it.points; });
+      const light = (b) => { const { pts } = byBlock[b]; const t = Q.blocks[b]; return pts >= t.green - 1e-9 ? "g" : pts >= t.yellow - 1e-9 ? "y" : "r"; };
+      const label = { g: "sitzt", y: "auffrischen", r: "hier ansetzen" };
+      app.innerHTML = `<h1>Deine Auswertung</h1>
+        <p>So sieht dein Stand in den einzelnen Themenblöcken aus. Mach dir ein Foto oder notiere dir deine Ampeln, denn beim Schließen der Seite ist das Ergebnis weg.</p>
+        <div class="lights">${Object.keys(Q.blocks).map((b) => { const L = light(b); const B = Q.blocks[b];
+          return `<div class="light ${L}"><span class="dot" aria-hidden="true"></span><div><h3>${esc(b)} · ${esc(B.name)}: ${label[L]}</h3>
+            <p class="small muted">${fmt(byBlock[b].pts)} von ${fmt(byBlock[b].max)} Punkten</p>
+            <p>${esc(Q.advice[L])}</p><p class="small"><strong>Das gehört dazu:</strong> ${esc(B.topics)}</p></div></div>`; }).join("")}</div>
+        <div class="note"><p><strong>Was bedeuten die Farben?</strong> Grün: Das Wissen sitzt. Gelb: Frische es mit dem Wissensspeicher auf. Rot: Hier fehlt noch Grundlagenwissen. Daran arbeiten wir im Unterricht gemeinsam, du bist damit nicht allein.</p></div>
+        <h2>Deine Antworten im Detail</h2>
+        ${items.map((it) => { const s = score(it); return `<div class="review"><div class="qhead"><span><span class="tag">${esc(it.block)}</span>Aufgabe ${esc(it.label)}</span><span class="res">${fmt(s)} / ${fmt(it.points)} P</span></div>
+          <p class="small">${it.prompt}</p><p class="sol"><strong>Lösung:</strong> ${esc(it.solution)}</p></div>`; }).join("")}`;
+      setNav(`<button class="btn ghost" id="print">Drucken / als PDF</button><button class="btn ghost" id="restart">Neu starten</button>`);
+      navEl.querySelector("#print").onclick = () => window.print();
+      navEl.querySelector("#restart").onclick = () => { S = { screen: "start", i: 0, ans: {}, self: {} }; render(); window.scrollTo(0, 0); };
+    }
+  }
+  render();
+})();
+</script>
+</body>
+</html>

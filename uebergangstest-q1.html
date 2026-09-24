@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Übergangstest: Bin ich bereit für die Q-Phase? · Biologie</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
+<style>:root{
+  --paper:#ffffff; --ink:#1e2b3a; --muted:#5a6878; --rule:#d5dce3; --soft:#f2f5f7;
+  --leaf:#2f7d4f; --leaf-soft:#e3f1e8; --ok:#2f7d4f; --mid:#b7791f; --low:#b3413a;
+  --mid-soft:#fbf1dc; --low-soft:#f8e3e1;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#162028; --ink:#e6ecf1; --muted:#a3b1bf; --rule:#34434f; --soft:#1e2a34;
+    --leaf:#6cc08f; --leaf-soft:#1f3a2b; --ok:#6cc08f; --mid:#e0a84a; --low:#e07a72;
+    --mid-soft:#3a2f1a; --low-soft:#3d2220;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#162028; --ink:#e6ecf1; --muted:#a3b1bf; --rule:#34434f; --soft:#1e2a34;
+  --leaf:#6cc08f; --leaf-soft:#1f3a2b; --ok:#6cc08f; --mid:#e0a84a; --low:#e07a72;
+  --mid-soft:#3a2f1a; --low-soft:#3d2220;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.5;-webkit-text-size-adjust:100%}
+main{max-width:44rem;margin:0 auto;padding:1.25rem 1.1rem 5rem}
+h1{font-size:1.9rem;line-height:1.15;margin:.4rem 0 .6rem}
+h2{font-size:1.3rem;margin:1.2rem 0 .6rem}
+p{margin:.4rem 0 .8rem}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.btn{background:var(--leaf);color:var(--paper);border:0;border-radius:8px;padding:.7rem 1.2rem;font-weight:700;min-height:44px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--rule)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.opt input:focus-visible + span{outline:3px solid var(--leaf);outline-offset:2px}
+.facts{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 1.4rem;padding:0;list-style:none}
+.facts li{background:var(--leaf-soft);border-radius:999px;padding:.25rem .8rem;font-size:.9rem;font-weight:600}
+.note{background:var(--soft);border-left:4px solid var(--leaf);padding:.75rem 1rem;margin:1rem 0;border-radius:0 6px 6px 0}
+.note p{margin:.25rem 0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--paper);padding:.6rem 0 .5rem;z-index:2;border-bottom:1px solid var(--rule);margin-bottom:1rem}
+.bar{height:6px;background:var(--soft);border-radius:3px;overflow:hidden;margin-top:.4rem}
+.bar i{display:block;height:100%;background:var(--leaf);transition:width .2s}
+@media (prefers-reduced-motion: reduce){.bar i{transition:none}}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.95rem}
+.tag{display:inline-block;background:var(--leaf);color:var(--paper);font-weight:700;border-radius:4px;padding:0 .45rem;margin-right:.4rem;font-size:.85rem}
+.prompt{font-size:1.1rem;font-weight:600;margin:.6rem 0 1rem}
+figure{margin:.5rem 0 1rem}
+svg{max-width:100%;height:auto;display:block}
+.opt{display:flex;gap:.7rem;align-items:flex-start;border:2px solid var(--rule);border-radius:8px;padding:.65rem .8rem;margin:.45rem 0;cursor:pointer;min-height:44px}
+.opt input{margin-top:.25rem;width:1.15rem;height:1.15rem;accent-color:var(--leaf);flex:none}
+.opt:has(input:checked){border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.dk span{color:var(--muted);font-style:italic}
+.row{display:grid;grid-template-columns:1fr minmax(8rem,auto);gap:.6rem;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--rule)}
+select{width:100%;min-height:44px;border:2px solid var(--rule);border-radius:8px;padding:.4rem .5rem;background:var(--paper)}
+input[type=text]{width:100%;min-height:44px;border:2px solid var(--rule);border-radius:8px;padding:.5rem .7rem;background:var(--paper)}
+textarea{width:100%;min-height:9rem;border:2px solid var(--rule);border-radius:8px;padding:.6rem .7rem;background:var(--paper);resize:vertical}
+.tf{display:grid;grid-template-columns:1fr auto auto;gap:.3rem .8rem;align-items:center}
+.tf .h{font-size:.85rem;color:var(--muted);font-weight:700;text-align:center}
+.tf label{display:flex;justify-content:center;min-width:44px;min-height:44px;align-items:center}
+.tf input{width:1.2rem;height:1.2rem;accent-color:var(--leaf)}
+.tf .s{padding:.45rem 0;border-bottom:1px solid var(--rule)}
+.gridq{overflow-x:auto}
+.gridq table{border-collapse:collapse;width:100%;min-width:30rem}
+.gridq th,.gridq td{border-bottom:1px solid var(--rule);padding:.45rem;text-align:left;vertical-align:middle}
+.gridq th{font-size:.85rem;color:var(--muted)}
+.blank{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center;margin:.4rem 0}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--rule);padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom,0px))}
+.nav .in{max-width:44rem;margin:0 auto;display:flex;justify-content:space-between;gap:.6rem}
+.overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.2rem,1fr));gap:.5rem;margin:1rem 0}
+.overview button{border:2px solid var(--rule);background:var(--paper);border-radius:8px;min-height:44px;font-weight:700}
+.overview button.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.self{border:2px solid var(--rule);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
+.own{background:var(--soft);border-radius:6px;padding:.6rem .8rem;white-space:pre-wrap;margin:.4rem 0 .8rem;min-height:2.2rem}
+.lights{display:grid;gap:.7rem;margin:1rem 0}
+.light{display:grid;grid-template-columns:auto 1fr;gap:.9rem;border-radius:10px;padding:.8rem 1rem;border:2px solid var(--rule)}
+.light .dot{width:1.6rem;height:1.6rem;border-radius:50%;margin-top:.15rem}
+.light.g{background:var(--leaf-soft);border-color:var(--ok)} .light.g .dot{background:var(--ok)}
+.light.y{background:var(--mid-soft);border-color:var(--mid)} .light.y .dot{background:var(--mid)}
+.light.r{background:var(--low-soft);border-color:var(--low)} .light.r .dot{background:var(--low)}
+.light h3{margin:0;font-size:1.05rem}
+.light p{margin:.2rem 0}
+.review{border-top:1px solid var(--rule);padding:.7rem 0}
+.review .res{font-weight:700;white-space:nowrap}
+.review .sol{color:var(--muted);font-size:.95rem}
+.hidden{display:none!important}
+@media print{
+  .nav,.noprint{display:none!important}
+  main{max-width:none;padding:0}
+  .light,.tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+<nav id="nav" class="nav hidden" aria-label="Navigation"></nav>
+<noscript><p style="padding:1rem">Bitte JavaScript aktivieren, um den Test zu bearbeiten.</p></noscript>
+<script>window.QUIZ = {"short": "Übergangstest Q1", "kicker": "Biologie · Start in die Q-Phase", "title": "Übergangstest: Bin ich bereit für die Q-Phase?", "minutes": 35, "intro": "Dieser Test prüft das Wissen aus der E-Phase, auf dem die Q-Phase aufbaut: Zellen, Proteine, Enzyme, Membranen, Zellteilung und naturwissenschaftliches Arbeiten. Bei jedem Block erfährst du, wofür du ihn in der Q-Phase brauchst.", "advice": {"g": "Dieses Wissen sitzt. Im Unterricht bekommst du hier Anwendungs- und Vertiefungsaufgaben.", "y": "Einiges sitzt, manches ist unsicher. Frische den Block mit dem Wissensspeicher auf und bearbeite eine Übungsaufgabe dazu.", "r": "Hier fehlen noch Grundlagen. Kein Problem: Genau daran arbeiten wir in den nächsten Wochen gemeinsam. Sag deiner Lehrkraft gern, dass dieser Block für dich rot ist."}, "blocks": {"A": {"name": "Zelle und Organellen", "green": 5, "yellow": 3, "topics": "pro- und eukaryotische Zelle, Organellen und ihre Funktion, Kompartimentierung, Endosymbiontentheorie. Gebraucht in Q1 (Proteinbiosynthese) und Q3 (Chloroplast, Mitochondrium).", "max": 6}, "B": {"name": "Kohlenhydrate und Lipide", "green": 2.5, "yellow": 1.5, "topics": "Glucose, Stärke, Cellulose; Bau von Phospholipiden und Lipiddoppelschicht. Gebraucht in Q2 (Nervenzellmembran) und Q3 (Fotosynthese, Zellatmung).", "max": 3}, "C": {"name": "Proteine", "green": 2.5, "yellow": 1.5, "topics": "Peptidbindung, vier Strukturebenen, Struktur bestimmt Funktion, Aufgaben von Proteinen. Gebraucht in Q1 (Translation, Mutationen) und Q2 (Ionenkanäle, Rezeptoren).", "max": 3}, "D": {"name": "Enzyme", "green": 5, "yellow": 3, "topics": "Enzymwirkung, Abhängigkeit von Temperatur (RGT-Regel), pH und Substratkonzentration, kompetitive und allosterische Hemmung. Gebraucht in Q1, Q2 und Q3.", "max": 6}, "E": {"name": "Biomembran und Stofftransport", "green": 5, "yellow": 3, "topics": "Flüssig-Mosaik-Modell, Diffusion, Osmose, Plasmolyse, passiver und aktiver Transport, Endo- und Exocytose. Gebraucht vor allem in Q2 (Neurobiologie) und Q3.", "max": 6}, "F": {"name": "Zellzyklus und Zellteilung", "green": 5, "yellow": 3, "topics": "Zellzyklus mit S-Phase, Mitose und Meiose im Vergleich, Karyogramm, Trisomie 21. Gebraucht in Q1 (Replikation, Humangenetik) und Q2 (Rekombination).", "max": 6}, "G": {"name": "Energie im Stoffwechsel", "green": 2.5, "yellow": 1.5, "topics": "Wortgleichungen von Fotosynthese und Zellatmung, ATP als Energieüberträger. Gebraucht in Q3 (Stoffwechsel).", "max": 3}, "H": {"name": "Naturwissenschaftlich arbeiten", "green": 4, "yellow": 2.5, "topics": "Experimente mit Variablen und Kontrollansatz, Diagramme auswerten, Modelle und ihre Grenzen, Operatoren. Gebraucht in allen Abituraufgaben.", "max": 5}}, "items": [{"block": "A", "points": 2, "type": "tf", "prompt": "Entscheide, ob die Aussagen richtig oder falsch sind.", "statements": [{"text": "Prokaryoten besitzen keinen Zellkern; ihre DNA liegt frei im Cytoplasma.", "answer": true}, {"text": "Prokaryoten besitzen keine Ribosomen.", "answer": false}, {"text": "Plasmide sind kleine ringförmige DNA-Moleküle, die bei Bakterien vorkommen.", "answer": true}, {"text": "Mitochondrien kommen in allen Zellen vor, auch in Bakterien.", "answer": false}], "solution": "richtig – falsch – richtig – falsch", "id": "q0", "label": "1"}, {"block": "A", "points": 2, "type": "match", "prompt": "Ordne jedem Zellorganell die passende Funktion zu. Eine Funktion bleibt übrig.", "options": ["Abbau von Zellbestandteilen und aufgenommenen Stoffen", "Bereitstellung von ATP durch Zellatmung", "Synthese von Proteinen", "Fotosynthese", "Verändern, Sortieren und Verpacken von Stoffen in Vesikel"], "rows": [{"label": "Ribosom", "correct": "Synthese von Proteinen"}, {"label": "Golgi-Apparat", "correct": "Verändern, Sortieren und Verpacken von Stoffen in Vesikel"}, {"label": "Mitochondrium", "correct": "Bereitstellung von ATP durch Zellatmung"}, {"label": "Lysosom", "correct": "Abbau von Zellbestandteilen und aufgenommenen Stoffen"}], "solution": "Ribosom: Proteinsynthese; Golgi-Apparat: Verändern und Verpacken in Vesikel; Mitochondrium: ATP durch Zellatmung; Lysosom: Abbau", "id": "q1", "label": "2"}, {"block": "A", "points": 2, "type": "multi", "pick": 2, "prompt": "Nach der Endosymbiontentheorie stammen Mitochondrien von ehemals frei lebenden Bakterien ab. Welche zwei Befunde stützen diese Theorie?", "options": ["Mitochondrien haben eine Doppelmembran.", "Mitochondrien besitzen einen eigenen Zellkern.", "Mitochondrien haben eigene ringförmige DNA.", "Mitochondrien haben eine Zellwand aus Cellulose.", "Mitochondrien enthalten Chlorophyll."], "correct": [0, 2], "solution": "Doppelmembran und eigene ringförmige DNA (weitere Belege: Ribosomen vom Bakterientyp, Vermehrung durch Teilung)", "id": "q2", "label": "3"}, {"block": "B", "points": 1, "type": "single", "prompt": "Welche Aussage trifft zu?", "options": ["Stärke ist ein Protein, Cellulose ein Kohlenhydrat.", "Stärke und Cellulose bestehen beide aus Glucose-Bausteinen, erfüllen aber unterschiedliche Aufgaben.", "Glucose ist ein Polysaccharid.", "Cellulose dient Pflanzen vor allem als Energiespeicher."], "correct": 1, "solution": "Stärke und Cellulose bestehen beide aus Glucose, erfüllen aber unterschiedliche Aufgaben (Speicher bzw. Gerüst).", "id": "q3", "label": "4"}, {"block": "B", "points": 2, "type": "open", "prompt": "Erkläre, warum Phospholipide in Wasser von selbst eine Doppelschicht bilden.", "criteria": [{"text": "Phospholipide haben einen hydrophilen (polaren) Kopf und hydrophobe (unpolare) Fettsäureschwänze; sie sind amphiphil.", "points": 1}, {"text": "Die Köpfe wenden sich dem Wasser zu, die Schwänze weichen dem Wasser aus und lagern sich zusammen, sodass eine Doppelschicht entsteht.", "points": 1}], "solution": "Amphiphiler Bau: hydrophile Köpfe zum Wasser, hydrophobe Schwänze voneinander abgeschirmt nach innen → Doppelschicht.", "id": "q4", "label": "5"}, {"block": "C", "points": 1, "type": "single", "prompt": "Bei der Verknüpfung zweier Aminosäuren zu einem Dipeptid …", "options": ["wird Wasser abgespalten.", "wird Wasser aufgenommen.", "entsteht eine Wasserstoffbrücke zwischen den Seitenketten.", "wird ATP gebildet."], "correct": 0, "solution": "… wird Wasser abgespalten (Kondensation).", "id": "q5", "label": "6"}, {"block": "C", "points": 2, "type": "open", "prompt": "Durch eine Mutation wird eine einzige Aminosäure im aktiven Zentrum eines Enzyms ausgetauscht. Erkläre, warum das Enzym dadurch seine Funktion verlieren kann.", "criteria": [{"text": "Die andere Aminosäure kann die Wechselwirkungen und damit die Raumstruktur (Tertiärstruktur) des Enzyms bzw. des aktiven Zentrums verändern.", "points": 1}, {"text": "Das Substrat passt dann nicht mehr ins aktive Zentrum, es entsteht kein Enzym-Substrat-Komplex (Struktur bestimmt Funktion).", "points": 1}], "solution": "Veränderte Raumstruktur des aktiven Zentrums → Substrat bindet nicht mehr → keine Katalyse.", "id": "q6", "label": "7"}, {"block": "D", "points": 1, "type": "single", "prompt": "Enzyme beschleunigen chemische Reaktionen, indem sie …", "options": ["die Aktivierungsenergie senken.", "der Reaktion Energie zuführen.", "selbst dauerhaft verbraucht werden.", "die Temperatur in der Zelle erhöhen."], "correct": 0, "solution": "… die Aktivierungsenergie senken.", "id": "q7", "label": "8"}, {"block": "D", "points": 1, "type": "single", "prompt": "Die Abbildung zeigt die Aktivität eines Verdauungsenzyms bei verschiedenen Temperaturen. Welche Beschreibung passt?", "figure": "<svg viewBox=\"0 0 460 262\" role=\"img\" aria-label=\"Diagramm: Enzymaktivität steigt mit der Temperatur bis etwa 40 Grad Celsius an und fällt danach steil ab, bei etwa 55 Grad ist sie nahezu null\"><g font-size=\"12\" fill=\"var(--ink)\" font-family=\"system-ui,sans-serif\"><line x1=\"60\" y1=\"210.0\" x2=\"440\" y2=\"210.0\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"214.0\" text-anchor=\"end\">0<\/text><line x1=\"60\" y1=\"177.3\" x2=\"440\" y2=\"177.3\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"181.3\" text-anchor=\"end\">20<\/text><line x1=\"60\" y1=\"144.5\" x2=\"440\" y2=\"144.5\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"148.5\" text-anchor=\"end\">40<\/text><line x1=\"60\" y1=\"111.8\" x2=\"440\" y2=\"111.8\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"115.8\" text-anchor=\"end\">60<\/text><line x1=\"60\" y1=\"79.1\" x2=\"440\" y2=\"79.1\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"83.1\" text-anchor=\"end\">80<\/text><line x1=\"60\" y1=\"46.4\" x2=\"440\" y2=\"46.4\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"50.4\" text-anchor=\"end\">100<\/text><text x=\"60.0\" y=\"228\" text-anchor=\"middle\">0<\/text><text x=\"123.3\" y=\"228\" text-anchor=\"middle\">10<\/text><text x=\"186.7\" y=\"228\" text-anchor=\"middle\">20<\/text><text x=\"250.0\" y=\"228\" text-anchor=\"middle\">30<\/text><text x=\"313.3\" y=\"228\" text-anchor=\"middle\">40<\/text><text x=\"376.7\" y=\"228\" text-anchor=\"middle\">50<\/text><text x=\"440.0\" y=\"228\" text-anchor=\"middle\">60<\/text><text x=\"250\" y=\"254\" text-anchor=\"middle\">Temperatur in °C<\/text><text x=\"16\" y=\"120\" text-anchor=\"middle\" transform=\"rotate(-90 16 120)\">Enzymaktivität in %<\/text><\/g><line x1=\"60\" y1=\"210\" x2=\"440\" y2=\"210\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><line x1=\"60\" y1=\"210\" x2=\"60\" y2=\"25\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><polyline points=\"60.0,199.6 63.2,199.3 66.3,198.9 69.5,198.5 72.7,198.1 75.8,197.7 79.0,197.2 82.2,196.8 85.3,196.3 88.5,195.9 91.7,195.4 94.8,194.8 98.0,194.3 101.2,193.8 104.3,193.2 107.5,192.6 110.7,192.0 113.8,191.4 117.0,190.7 120.2,190.0 123.3,189.3 126.5,188.6 129.7,187.9 132.8,187.1 136.0,186.3 139.2,185.4 142.3,184.6 145.5,183.7 148.7,182.8 151.8,181.8 155.0,180.8 158.2,179.8 161.3,178.7 164.5,177.6 167.7,176.5 170.8,175.3 174.0,174.1 177.2,172.9 180.3,171.5 183.5,170.2 186.7,168.8 189.8,167.4 193.0,165.9 196.2,164.3 199.3,162.7 202.5,161.1 205.7,159.3 208.8,157.6 212.0,155.7 215.2,153.8 218.3,151.8 221.5,149.8 224.7,147.7 227.8,145.5 231.0,143.2 234.2,140.9 237.3,138.5 240.5,136.0 243.7,133.4 246.8,130.7 250.0,127.9 253.2,125.0 256.3,122.0 259.5,118.9 262.7,115.8 265.8,112.4 269.0,109.0 272.2,105.5 275.3,101.8 278.5,98.0 281.7,94.1 284.8,90.0 288.0,85.8 291.2,81.5 294.3,76.9 297.5,72.3 300.7,67.4 303.8,62.4 307.0,57.3 310.2,51.9 313.3,46.4 316.5,47.1 319.7,49.2 322.8,52.8 326.0,57.6 329.2,63.6 332.3,70.6 335.5,78.4 338.7,86.9 341.8,95.8 345.0,105.1 348.2,114.4 351.3,123.7 354.5,132.8 357.7,141.5 360.8,149.8 364.0,157.5 367.2,164.7 370.3,171.2 373.5,177.1 376.7,182.3 379.8,187.0 383.0,191.0 386.2,194.4 389.3,197.4 392.5,199.8 395.7,201.9 398.8,203.6 402.0,205.0 405.2,206.1 408.3,207.0 411.5,207.7 414.7,208.3 417.8,208.7 421.0,209.0 424.2,209.3 427.3,209.5 430.5,209.6 433.7,209.7 436.8,209.8 440.0,209.9\" fill=\"none\" stroke=\"var(--leaf)\" stroke-width=\"3\" stroke-linejoin=\"round\"/><\/svg>", "options": ["Die Aktivität steigt gleichmäßig bis 60 °C an.", "Die Aktivität steigt bis etwa 40 °C an und fällt danach steil ab; bei etwa 55 °C ist sie nahezu null.", "Die Aktivität ist zwischen 20 °C und 50 °C konstant.", "Die Aktivität fällt ab 20 °C ab."], "correct": 1, "solution": "Anstieg bis ca. 40 °C (Optimum), danach steiler Abfall, bei ca. 55 °C nahezu null.", "id": "q8", "label": "9a"}, {"block": "D", "points": 2, "type": "open", "prompt": "Erkläre den Anstieg der Enzymaktivität bis etwa 40 °C und den Abfall danach (Abbildung aus der vorigen Aufgabe).", "figure": "<svg viewBox=\"0 0 460 262\" role=\"img\" aria-label=\"Diagramm: Enzymaktivität steigt mit der Temperatur bis etwa 40 Grad Celsius an und fällt danach steil ab, bei etwa 55 Grad ist sie nahezu null\"><g font-size=\"12\" fill=\"var(--ink)\" font-family=\"system-ui,sans-serif\"><line x1=\"60\" y1=\"210.0\" x2=\"440\" y2=\"210.0\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"214.0\" text-anchor=\"end\">0<\/text><line x1=\"60\" y1=\"177.3\" x2=\"440\" y2=\"177.3\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"181.3\" text-anchor=\"end\">20<\/text><line x1=\"60\" y1=\"144.5\" x2=\"440\" y2=\"144.5\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"148.5\" text-anchor=\"end\">40<\/text><line x1=\"60\" y1=\"111.8\" x2=\"440\" y2=\"111.8\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"115.8\" text-anchor=\"end\">60<\/text><line x1=\"60\" y1=\"79.1\" x2=\"440\" y2=\"79.1\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"83.1\" text-anchor=\"end\">80<\/text><line x1=\"60\" y1=\"46.4\" x2=\"440\" y2=\"46.4\" stroke=\"var(--rule)\" stroke-width=\"1\"/><text x=\"54\" y=\"50.4\" text-anchor=\"end\">100<\/text><text x=\"60.0\" y=\"228\" text-anchor=\"middle\">0<\/text><text x=\"123.3\" y=\"228\" text-anchor=\"middle\">10<\/text><text x=\"186.7\" y=\"228\" text-anchor=\"middle\">20<\/text><text x=\"250.0\" y=\"228\" text-anchor=\"middle\">30<\/text><text x=\"313.3\" y=\"228\" text-anchor=\"middle\">40<\/text><text x=\"376.7\" y=\"228\" text-anchor=\"middle\">50<\/text><text x=\"440.0\" y=\"228\" text-anchor=\"middle\">60<\/text><text x=\"250\" y=\"254\" text-anchor=\"middle\">Temperatur in °C<\/text><text x=\"16\" y=\"120\" text-anchor=\"middle\" transform=\"rotate(-90 16 120)\">Enzymaktivität in %<\/text><\/g><line x1=\"60\" y1=\"210\" x2=\"440\" y2=\"210\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><line x1=\"60\" y1=\"210\" x2=\"60\" y2=\"25\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><polyline points=\"60.0,199.6 63.2,199.3 66.3,198.9 69.5,198.5 72.7,198.1 75.8,197.7 79.0,197.2 82.2,196.8 85.3,196.3 88.5,195.9 91.7,195.4 94.8,194.8 98.0,194.3 101.2,193.8 104.3,193.2 107.5,192.6 110.7,192.0 113.8,191.4 117.0,190.7 120.2,190.0 123.3,189.3 126.5,188.6 129.7,187.9 132.8,187.1 136.0,186.3 139.2,185.4 142.3,184.6 145.5,183.7 148.7,182.8 151.8,181.8 155.0,180.8 158.2,179.8 161.3,178.7 164.5,177.6 167.7,176.5 170.8,175.3 174.0,174.1 177.2,172.9 180.3,171.5 183.5,170.2 186.7,168.8 189.8,167.4 193.0,165.9 196.2,164.3 199.3,162.7 202.5,161.1 205.7,159.3 208.8,157.6 212.0,155.7 215.2,153.8 218.3,151.8 221.5,149.8 224.7,147.7 227.8,145.5 231.0,143.2 234.2,140.9 237.3,138.5 240.5,136.0 243.7,133.4 246.8,130.7 250.0,127.9 253.2,125.0 256.3,122.0 259.5,118.9 262.7,115.8 265.8,112.4 269.0,109.0 272.2,105.5 275.3,101.8 278.5,98.0 281.7,94.1 284.8,90.0 288.0,85.8 291.2,81.5 294.3,76.9 297.5,72.3 300.7,67.4 303.8,62.4 307.0,57.3 310.2,51.9 313.3,46.4 316.5,47.1 319.7,49.2 322.8,52.8 326.0,57.6 329.2,63.6 332.3,70.6 335.5,78.4 338.7,86.9 341.8,95.8 345.0,105.1 348.2,114.4 351.3,123.7 354.5,132.8 357.7,141.5 360.8,149.8 364.0,157.5 367.2,164.7 370.3,171.2 373.5,177.1 376.7,182.3 379.8,187.0 383.0,191.0 386.2,194.4 389.3,197.4 392.5,199.8 395.7,201.9 398.8,203.6 402.0,205.0 405.2,206.1 408.3,207.0 411.5,207.7 414.7,208.3 417.8,208.7 421.0,209.0 424.2,209.3 427.3,209.5 430.5,209.6 433.7,209.7 436.8,209.8 440.0,209.9\" fill=\"none\" stroke=\"var(--leaf)\" stroke-width=\"3\" stroke-linejoin=\"round\"/><\/svg>", "criteria": [{"text": "Anstieg: Mit steigender Temperatur bewegen sich die Teilchen schneller, Enzym und Substrat treffen häufiger aufeinander (RGT-Regel: etwa doppelte bis dreifache Geschwindigkeit je 10 °C).", "points": 1}, {"text": "Abfall: Oberhalb des Optimums wird das Enzym denaturiert, seine Raumstruktur geht verloren und das aktive Zentrum passt nicht mehr.", "points": 1}], "solution": "Anstieg durch mehr Zusammenstöße (RGT-Regel); Abfall durch Denaturierung des Enzyms.", "id": "q9", "label": "9b"}, {"block": "D", "points": 1, "type": "single", "prompt": "Ein Hemmstoff verlangsamt eine Enzymreaktion. Erhöht man die Substratkonzentration stark, erreicht die Reaktion wieder fast ihre ursprüngliche Geschwindigkeit. Um welche Art der Hemmung handelt es sich?", "options": ["kompetitive Hemmung", "allosterische / nicht-kompetitive Hemmung", "Denaturierung", "Substrathemmung"], "correct": 0, "solution": "kompetitive Hemmung", "id": "q10", "label": "10a"}, {"block": "D", "points": 1, "type": "open", "prompt": "Begründe deine Antwort aus der vorigen Aufgabe: Warum hebt mehr Substrat diese Hemmung auf?", "criteria": [{"text": "Hemmstoff und Substrat konkurrieren um das aktive Zentrum; bei viel Substrat binden häufiger Substratmoleküle und verdrängen den Hemmstoff.", "points": 1}], "solution": "Konkurrenz um das aktive Zentrum; viel Substrat verdrängt den Hemmstoff.", "id": "q11", "label": "10b"}, {"block": "E", "points": 3, "type": "match", "prompt": "Ordne jedem Vorgang die passende Transportform zu.", "options": ["einfache Diffusion", "passiver Transport durch ein Membranprotein", "aktiver Transport"], "rows": [{"label": "Sauerstoff gelangt durch die Lipiddoppelschicht in die Zelle, weil außen mehr Sauerstoff ist als innen.", "correct": "einfache Diffusion"}, {"label": "Kalium-Ionen strömen durch ein Kanalprotein aus der Zelle, entlang ihres Konzentrationsgefälles.", "correct": "passiver Transport durch ein Membranprotein"}, {"label": "Natrium-Ionen werden unter ATP-Verbrauch aus der Zelle gepumpt, obwohl außen schon mehr Natrium ist.", "correct": "aktiver Transport"}], "solution": "einfache Diffusion – passiver Transport durch Kanalprotein – aktiver Transport", "id": "q12", "label": "11"}, {"block": "E", "points": 2, "type": "open", "prompt": "Zellen der Roten Zwiebel werden in eine konzentrierte Salzlösung gelegt. Unter dem Mikroskop löst sich der gefärbte Zellinhalt von der Zellwand ab. Erkläre diese Beobachtung.", "criteria": [{"text": "Die Außenlösung ist höher konzentriert als der Zellsaft; Wasser strömt durch Osmose aus der Vakuole durch die selektiv permeable Membran nach außen.", "points": 1}, {"text": "Der Protoplast schrumpft und löst sich von der starren Zellwand ab (Plasmolyse).", "points": 1}], "solution": "Osmotischer Wasserausstrom in die höher konzentrierte Außenlösung → Protoplast schrumpft → Plasmolyse.", "id": "q13", "label": "12"}, {"block": "E", "points": 1, "type": "single", "prompt": "Wie werden Stoffe, die in Vesikeln verpackt sind, aus der Zelle abgegeben?", "options": ["Die Vesikel diffundieren durch die Zellmembran.", "Die Vesikelmembran verschmilzt mit der Zellmembran (Exocytose).", "Die Zellmembran stülpt sich nach innen ein (Endocytose).", "Die Stoffe werden durch Kanalproteine gepumpt."], "correct": 1, "solution": "Exocytose: Die Vesikelmembran verschmilzt mit der Zellmembran.", "id": "q14", "label": "13"}, {"block": "F", "points": 1, "type": "single", "prompt": "In welcher Phase des Zellzyklus wird die DNA verdoppelt?", "options": ["G1-Phase", "S-Phase", "G2-Phase", "Mitose"], "correct": 1, "solution": "S-Phase", "id": "q15", "label": "14"}, {"block": "F", "points": 3, "type": "grid", "scoring": "cell", "prompt": "Vergleiche Mitose und Meiose.", "cols": ["Mitose", "Meiose"], "rows": [{"label": "Anzahl der Tochterzellen", "cells": [{"options": ["1", "2", "4"], "correct": "2"}, {"options": ["1", "2", "4"], "correct": "4"}]}, {"label": "Chromosomensatz der Tochterzellen", "cells": [{"options": ["haploid", "diploid"], "correct": "diploid"}, {"options": ["haploid", "diploid"], "correct": "haploid"}]}, {"label": "Tochterzellen genetisch identisch?", "cells": [{"options": ["ja", "nein"], "correct": "ja"}, {"options": ["ja", "nein"], "correct": "nein"}]}], "solution": "Mitose: 2, diploid, identisch; Meiose: 4, haploid, nicht identisch", "id": "q16", "label": "15"}, {"block": "F", "points": 1, "type": "single", "prompt": "Ein Karyogramm zeigt 47 Chromosomen: Chromosom 21 liegt dreifach vor, außerdem ein X- und ein Y-Chromosom. Welche Angabe passt?", "options": ["Trisomie 21, weiblich", "Trisomie 21, männlich", "Monosomie 21, männlich", "kein Befund, männlich"], "correct": 1, "solution": "Trisomie 21, männlich", "id": "q17", "label": "16a"}, {"block": "F", "points": 1, "type": "open", "prompt": "Erkläre, wie eine Trisomie 21 entstehen kann.", "criteria": [{"text": "Durch eine Fehlverteilung (Non-Disjunction) der Chromosomen 21 in der Meiose erhält eine Keimzelle zwei statt ein Chromosom 21; nach der Befruchtung liegt es dreifach vor.", "points": 1}], "solution": "Fehlverteilung in der Meiose → Keimzelle mit zwei Chromosomen 21 → nach Befruchtung drei.", "id": "q18", "label": "16b"}, {"block": "G", "points": 1, "type": "single", "prompt": "Welche Aussage über ATP trifft zu?", "options": ["ATP ist ein Enzym der Zellatmung.", "Bei der Spaltung von ATP zu ADP und Phosphat wird Energie frei, die die Zelle für Arbeit nutzt.", "ATP wird nur in Chloroplasten gebildet.", "ATP speichert die Erbinformation."], "correct": 1, "solution": "Bei der Spaltung von ATP zu ADP und Phosphat wird nutzbare Energie frei.", "id": "q19", "label": "17"}, {"block": "G", "points": 2, "type": "grid", "scoring": "row", "prompt": "Ordne jedem Vorgang Organell und Wortgleichung zu.", "cols": ["Organell", "Wortgleichung"], "rows": [{"label": "Fotosynthese", "cells": [{"options": ["Chloroplast", "Mitochondrium", "Zellkern"], "correct": "Chloroplast"}, {"options": ["Kohlenstoffdioxid + Wasser → Glucose + Sauerstoff", "Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser", "Glucose → Stärke + Wasser"], "correct": "Kohlenstoffdioxid + Wasser → Glucose + Sauerstoff"}]}, {"label": "Zellatmung", "cells": [{"options": ["Chloroplast", "Mitochondrium", "Zellkern"], "correct": "Mitochondrium"}, {"options": ["Kohlenstoffdioxid + Wasser → Glucose + Sauerstoff", "Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser", "Glucose → Stärke + Wasser"], "correct": "Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser"}]}], "solution": "Fotosynthese: Chloroplast, CO₂ + Wasser → Glucose + O₂; Zellatmung: Mitochondrium, Glucose + O₂ → CO₂ + Wasser", "id": "q20", "label": "18"}, {"block": "H", "points": 3, "type": "grid", "scoring": "row", "prompt": "Hypothese: „Das Enzym Katalase aus Kartoffeln arbeitet bei 37 °C schneller als bei 20 °C.“ Die Aktivität wird an der Menge des gebildeten Sauerstoffs gemessen. Ordne zu.", "cols": ["Deine Wahl"], "rows": [{"label": "Unabhängige Variable", "cells": [{"options": ["Temperatur", "Menge des gebildeten Sauerstoffs", "Kartoffelsorte", "Größe der Reagenzgläser"], "correct": "Temperatur"}]}, {"label": "Abhängige Variable", "cells": [{"options": ["Temperatur", "Menge des gebildeten Sauerstoffs", "Kartoffelsorte", "Größe der Reagenzgläser"], "correct": "Menge des gebildeten Sauerstoffs"}]}, {"label": "Sinnvoller Kontrollansatz", "cells": [{"options": ["gleicher Ansatz mit Wasser statt Kartoffelsaft", "gleicher Ansatz bei 37 °C mit doppelter Menge Kartoffelsaft", "kein Kontrollansatz nötig", "gleicher Ansatz bei 60 °C"], "correct": ["gleicher Ansatz mit Wasser statt Kartoffelsaft"]}]}], "solution": "UV: Temperatur; AV: Sauerstoffmenge (pro Zeit); Kontrolle: Ansatz ohne Enzym (z. B. Wasser oder gekochter Kartoffelsaft)", "id": "q21", "label": "19"}, {"block": "H", "points": 1, "type": "single", "prompt": "Welcher Operator verlangt, einen Sachverhalt veranschaulichend darzustellen und durch zusätzliche Informationen verständlich zu machen?", "options": ["beschreiben", "erklären", "erläutern", "beurteilen"], "correct": 2, "solution": "erläutern", "id": "q22", "label": "20"}, {"block": "H", "points": 1, "type": "single", "prompt": "Welche Aussage beschreibt eine Grenze des Schlüssel-Schloss-Modells der Enzymwirkung?", "options": ["Es erklärt nicht, warum Enzyme nur bestimmte Substrate umsetzen.", "Es stellt Enzym und Substrat als starr dar, obwohl sich das aktive Zentrum bei der Bindung anpasst.", "Es gilt nur für Verdauungsenzyme.", "Es berücksichtigt nicht, dass Enzyme verbraucht werden."], "correct": 1, "solution": "Es stellt Enzym und Substrat als starr dar; tatsächlich passt sich das aktive Zentrum an (induzierte Passform).", "id": "q23", "label": "21"}]};</script>
+<script>(function () {
+  "use strict";
+  const Q = window.QUIZ;
+  const app = document.getElementById("app");
+  const navEl = document.getElementById("nav");
+  // Alle Antworten liegen nur in dieser Variable im Arbeitsspeicher des Browsers.
+  // Es wird nichts gespeichert, gesendet oder protokolliert.
+  let S = { screen: "start", i: 0, ans: {}, self: {} };
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmt = (n) => (Math.round(n * 10) / 10).toString().replace(".", ",");
+  const items = Q.items;
+  const openItems = items.filter((it) => it.type === "open");
+  const taskCount = new Set(items.map((it) => String(it.label).replace(/[a-z]$/, ""))).size;
+
+  window.addEventListener("beforeunload", (e) => {
+    if (S.screen !== "start" && S.screen !== "result" && Object.keys(S.ans).length) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  function go(screen, i) { S.screen = screen; if (i !== undefined) S.i = i; render(); window.scrollTo(0, 0); const h = app.querySelector("h1,h2,.prompt"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); } }
+
+  // ---------- Antwortstatus ----------
+  function answered(it) {
+    const a = S.ans[it.id];
+    if (a === undefined || a === null) return false;
+    switch (it.type) {
+      case "single": return a !== undefined;
+      case "multi": return a.length > 0;
+      case "tf": return a.some((x) => x !== null && x !== undefined);
+      case "match": case "grid": return Object.values(a).some((v) => v !== "");
+      case "order": return a.some((v) => v);
+      case "text": return a.some((v) => v && v.trim());
+      case "number": case "open": return a.trim() !== "";
+    }
+    return false;
+  }
+
+  // ---------- Bewertung ----------
+  const norm = (s) => String(s || "").trim().toLowerCase().replace(/\s+/g, " ").replace(/[.,;!]+$/, "");
+  const matches = (val, patterns) => patterns.some((p) => new RegExp(p, "i").test(norm(val)));
+
+  function score(it) {
+    const a = S.ans[it.id];
+    const P = it.points;
+    switch (it.type) {
+      case "single": {
+        const ok = Array.isArray(it.correct) ? it.correct : [it.correct];
+        return ok.includes(a) ? P : 0;
+      }
+      case "multi": {
+        const sel = a || [];
+        if (it.pick) { const hits = sel.filter((x) => it.correct.includes(x)).length; return Math.min(P, hits * (P / it.pick)); }
+        const setOk = sel.length === it.correct.length && it.correct.every((x) => sel.includes(x));
+        return setOk ? P : 0;
+      }
+      case "tf": {
+        const per = P / it.statements.length;
+        return it.statements.reduce((s, st, k) => s + ((a || [])[k] === st.answer ? per : 0), 0);
+      }
+      case "match": {
+        const per = P / it.rows.length;
+        return it.rows.reduce((s, r, k) => s + ((a || {})[k] === r.correct ? per : 0), 0);
+      }
+      case "grid": {
+        const g = a || {};
+        const cellOk = (r, c) => { const cell = it.rows[r].cells[c]; const v = g[r + "-" + c]; return (Array.isArray(cell.correct) ? cell.correct : [cell.correct]).includes(v); };
+        if (it.scoring === "cell") {
+          const n = it.rows.reduce((s, r) => s + r.cells.length, 0);
+          let sum = 0; it.rows.forEach((r, ri) => r.cells.forEach((_, ci) => { if (cellOk(ri, ci)) sum += P / n; }));
+          return sum;
+        }
+        return it.rows.reduce((s, r, ri) => s + (r.cells.every((_, ci) => cellOk(ri, ci)) ? P / it.rows.length : 0), 0);
+      }
+      case "order": {
+        const pos = a || [];
+        return it.items.every((_, k) => Number(pos[k]) === it.correct[k]) ? P : 0;
+      }
+      case "text": {
+        const v = (a || []).map(norm);
+        if (it.unordered) {
+          const pool = [...v];
+          const ok = it.blanks.every((b) => { const idx = pool.findIndex((x) => matches(x, b.accept)); if (idx < 0) return false; pool.splice(idx, 1); return true; });
+          return ok ? P : 0;
+        }
+        return it.blanks.every((b, k) => matches(v[k], b.accept)) ? P : 0;
+      }
+      case "number": {
+        const m = String(a || "").replace(",", ".").match(/-?\d+(\.\d+)?/);
+        if (!m) return 0; const n = parseFloat(m[0]);
+        return n >= it.range[0] && n <= it.range[1] ? P : 0;
+      }
+      case "open": {
+        const chk = S.self[it.id] || [];
+        return it.criteria.reduce((s, c, k) => s + (chk[k] ? c.points : 0), 0);
+      }
+    }
+    return 0;
+  }
+
+  // ---------- Bausteine ----------
+  function topBar() {
+    const n = items.length;
+    return `<div class="top noprint"><div class="qhead"><span class="muted">${esc(Q.short)}</span><span>Schritt ${S.i + 1} von ${n}</span></div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${S.i + 1}"><i style="width:${((S.i + 1) / n) * 100}%"></i></div></div>`;
+  }
+  function setNav(html) { navEl.innerHTML = html ? `<div class="in">${html}</div>` : ""; navEl.classList.toggle("hidden", !html); }
+  const selectHtml = (name, opts, val, label) =>
+    `<select name="${name}" aria-label="${esc(label)}"><option value="">– bitte wählen –</option>${opts.map((o) => `<option value="${esc(o)}"${val === o ? " selected" : ""}>${esc(o)}</option>`).join("")}<option value="__dk"${val === "__dk" ? " selected" : ""}>weiß ich nicht</option></select>`;
+
+  function renderItem(it) {
+    const a = S.ans[it.id];
+    let body = "";
+    const id = it.id;
+    switch (it.type) {
+      case "single":
+        body = it.options.map((o, k) => `<label class="opt"><input type="radio" name="${id}" value="${k}"${a === k ? " checked" : ""}><span>${esc(o)}</span></label>`).join("")
+          + `<label class="opt dk"><input type="radio" name="${id}" value="dk"${a === "dk" ? " checked" : ""}><span>weiß ich nicht</span></label>`;
+        break;
+      case "multi":
+        body = (it.pick ? `<p class="muted small">Wähle genau ${it.pick} aus.</p>` : `<p class="muted small">Mehrere Antworten können richtig sein.</p>`)
+          + it.options.map((o, k) => `<label class="opt"><input type="checkbox" name="${id}" value="${k}"${(a || []).includes(k) ? " checked" : ""}><span>${esc(o)}</span></label>`).join("");
+        break;
+      case "tf":
+        body = `<div class="tf" role="group"><span></span><span class="h">richtig</span><span class="h">falsch</span>`
+          + it.statements.map((st, k) => `<span class="s">${esc(st.text)}</span>
+            <label><input type="radio" name="${id}-${k}" value="1"${(a || [])[k] === true ? " checked" : ""} aria-label="richtig: ${esc(st.text)}"></label>
+            <label><input type="radio" name="${id}-${k}" value="0"${(a || [])[k] === false ? " checked" : ""} aria-label="falsch: ${esc(st.text)}"></label>`).join("") + `</div>`;
+        break;
+      case "match":
+        body = it.rows.map((r, k) => `<div class="row"><span>${esc(r.label)}</span>${selectHtml(id + "-" + k, it.options, (a || {})[k], r.label)}</div>`).join("");
+        break;
+      case "order":
+        body = `<p class="muted small">Gib jedem Begriff seinen Platz (1 = kleinste Ebene).</p>` + it.items.map((t, k) =>
+          `<div class="row"><span>${esc(t)}</span><select name="${id}-${k}" aria-label="Platz für ${esc(t)}"><option value="">– Platz –</option>${it.items.map((_, p) => `<option value="${p + 1}"${String((a || [])[k]) === String(p + 1) ? " selected" : ""}>${p + 1}</option>`).join("")}</select></div>`).join("");
+        break;
+      case "grid":
+        body = `<div class="gridq"><table><thead><tr><th></th>${it.cols.map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>`
+          + it.rows.map((r, ri) => `<tr><th scope="row">${esc(r.label)}</th>${r.cells.map((c, ci) => `<td>${selectHtml(`${id}-${ri}-${ci}`, c.options, (a || {})[ri + "-" + ci], r.label + ", " + it.cols[ci])}</td>`).join("")}</tr>`).join("")
+          + `</tbody></table></div>`;
+        break;
+      case "text":
+        body = it.template ? `<p>${it.template.replace(/\{(\d+)\}/g, (_, n) => `<input type="text" name="${id}-${n}" value="${esc((a || [])[n] || "")}" aria-label="Lücke ${Number(n) + 1}" style="width:11rem;display:inline-block;margin:.2rem">`)}</p>`
+          : it.blanks.map((b, k) => `<div class="blank"><label for="${id}-${k}">${esc(b.label)}</label><input type="text" id="${id}-${k}" name="${id}-${k}" value="${esc((a || [])[k] || "")}" autocomplete="off"></div>`).join("");
+        break;
+      case "number":
+        body = `<div class="blank"><label for="${id}">${esc(it.label || "Antwort")}</label><input type="text" inputmode="decimal" id="${id}" name="${id}" value="${esc(a || "")}" autocomplete="off"></div>`;
+        break;
+      case "open":
+        body = `<label for="${id}" class="muted small">Deine Antwort in ganzen Sätzen. Nach dem Test vergleichst du sie selbst mit der Musterlösung.</label><textarea id="${id}" name="${id}">${esc(a || "")}</textarea>`;
+        break;
+    }
+    return `<div class="qhead"><span><span class="tag">${esc(it.block)}</span><strong>Aufgabe ${esc(it.label)}</strong></span><span class="muted">${fmt(it.points)} P</span></div>
+      <p class="prompt">${it.prompt}</p>${it.figure ? `<figure>${it.figure}</figure>` : ""}<form id="f" onsubmit="return false">${body}</form>`;
+  }
+
+  function readItem(it) {
+    const f = document.getElementById("f"); if (!f) return;
+    const val = (n) => { const el = f.elements[n]; return el ? el.value : ""; };
+    switch (it.type) {
+      case "single": { const c = f.querySelector("input:checked"); if (c) S.ans[it.id] = c.value === "dk" ? "dk" : Number(c.value); break; }
+      case "multi": S.ans[it.id] = [...f.querySelectorAll("input:checked")].map((x) => Number(x.value)); break;
+      case "tf": S.ans[it.id] = it.statements.map((_, k) => { const c = f.querySelector(`input[name="${it.id}-${k}"]:checked`); return c ? c.value === "1" : null; }); break;
+      case "match": { const o = {}; it.rows.forEach((_, k) => (o[k] = val(`${it.id}-${k}`))); S.ans[it.id] = o; break; }
+      case "order": S.ans[it.id] = it.items.map((_, k) => val(`${it.id}-${k}`)); break;
+      case "grid": { const o = {}; it.rows.forEach((r, ri) => r.cells.forEach((_, ci) => (o[ri + "-" + ci] = val(`${it.id}-${ri}-${ci}`)))); S.ans[it.id] = o; break; }
+      case "text": S.ans[it.id] = it.blanks.map((_, k) => val(`${it.id}-${k}`)); break;
+      case "number": case "open": S.ans[it.id] = val(it.id); break;
+    }
+    if (it.type === "multi" && it.pick) {
+      const boxes = [...f.querySelectorAll("input[type=checkbox]")];
+      const n = boxes.filter((b) => b.checked).length;
+      boxes.forEach((b) => (b.disabled = !b.checked && n >= it.pick));
+    }
+  }
+
+  // ---------- Bildschirme ----------
+  function render() {
+    if (S.screen === "start") {
+      app.innerHTML = `<p class="muted">${esc(Q.kicker)}</p><h1>${esc(Q.title)}</h1>
+        <ul class="facts"><li>${taskCount} Aufgaben</li><li>ca. ${Q.minutes} Minuten</li><li>keine Note</li><li>nichts wird gespeichert</li></ul>
+        <p>${Q.intro}</p>
+        <div class="note"><p><strong>So funktioniert es:</strong> Du beantwortest die Aufgaben nacheinander. ${openItems.length ? "Bei Aufgaben mit eigenem Text vergleichst du am Ende deine Antwort selbst mit der Musterlösung. " : ""}Danach siehst du für jeden Themenblock eine Ampel und was du wiederholen solltest.</p>
+        <p><strong>Wenn du etwas nicht weißt,</strong> wähle „weiß ich nicht“. Raten macht deine Ampeln ungenau.</p>
+        <p><strong>Datenschutz:</strong> Deine Antworten bleiben nur in diesem Browserfenster. Nichts wird gespeichert oder verschickt, auch deine Lehrkraft sieht nichts. Wenn du die Seite neu lädst oder schließt, ist alles weg.</p></div>
+        <button class="btn" id="start">Test starten</button>`;
+      setNav("");
+      app.querySelector("#start").onclick = () => go("q", 0);
+      return;
+    }
+    if (S.screen === "q") {
+      const it = items[S.i];
+      app.innerHTML = topBar() + renderItem(it);
+      const f = document.getElementById("f");
+      f.addEventListener("input", () => readItem(it)); f.addEventListener("change", () => readItem(it));
+      readItem(it);
+      setNav(`<button class="btn ghost" id="back"${S.i === 0 ? " disabled" : ""}>Zurück</button>
+        <button class="btn ghost" id="ov">Übersicht</button>
+        <button class="btn" id="next">${S.i === items.length - 1 ? "Fertig" : "Weiter"}</button>`);
+      navEl.querySelector("#back").onclick = () => go("q", S.i - 1);
+      navEl.querySelector("#ov").onclick = () => go("overview");
+      navEl.querySelector("#next").onclick = () => (S.i === items.length - 1 ? go("overview") : go("q", S.i + 1));
+      return;
+    }
+    if (S.screen === "overview") {
+      const open = items.filter((it) => !answered(it));
+      app.innerHTML = `<h1>Übersicht</h1><p>Grün markierte Aufgaben hast du bearbeitet. Tippe auf eine Nummer, um zurückzuspringen.</p>
+        <div class="overview">${items.map((it, k) => `<button data-k="${k}" class="${answered(it) ? "done" : ""}" aria-label="Aufgabe ${esc(it.label)}${answered(it) ? ", bearbeitet" : ", offen"}">${esc(it.label)}</button>`).join("")}</div>
+        ${open.length ? `<div class="note"><p>Noch offen: Aufgabe ${open.map((it) => esc(it.label)).join(", ")}. Offene Aufgaben zählen wie „weiß ich nicht“.</p></div>` : `<p>Alle Aufgaben sind bearbeitet.</p>`}`;
+      app.querySelectorAll(".overview button").forEach((b) => (b.onclick = () => go("q", Number(b.dataset.k))));
+      setNav(`<button class="btn ghost" id="back">Zurück zu den Aufgaben</button><button class="btn" id="eval">${openItems.length ? "Weiter zum Selbstcheck" : "Auswerten"}</button>`);
+      navEl.querySelector("#back").onclick = () => go("q", S.i);
+      navEl.querySelector("#eval").onclick = () => go(openItems.length ? "self" : "result");
+      return;
+    }
+    if (S.screen === "self") {
+      app.innerHTML = `<h1>Selbstcheck</h1><p>Vergleiche deine Antworten mit den Kriterien. Setze nur dann einen Haken, wenn der Punkt <strong>sinngemäß</strong> in deiner Antwort steht. Sei ehrlich zu dir: Es gibt keine Note, die Ampel soll dir nur zeigen, was du wiederholen solltest.</p>`
+        + openItems.map((it) => `<div class="self"><div class="qhead"><span><span class="tag">${esc(it.block)}</span><strong>Aufgabe ${esc(it.label)}</strong></span><span class="muted">${fmt(it.points)} P</span></div>
+          <p><strong>${it.prompt}</strong></p><p class="muted small">Deine Antwort:</p><div class="own"></div>
+          ${it.criteria.map((c, k) => `<label class="opt"><input type="checkbox" data-id="${it.id}" data-k="${k}"${(S.self[it.id] || [])[k] ? " checked" : ""}><span>${esc(c.text)} <span class="muted">(${fmt(c.points)} P)</span></span></label>`).join("")}</div>`).join("");
+      app.querySelectorAll(".self").forEach((box, k) => { const t = S.ans[openItems[k].id]; box.querySelector(".own").textContent = t && t.trim() ? t : "(keine Antwort)"; });
+      app.querySelectorAll("input[data-id]").forEach((cb) => (cb.onchange = () => { const arr = S.self[cb.dataset.id] || []; arr[Number(cb.dataset.k)] = cb.checked; S.self[cb.dataset.id] = arr; }));
+      setNav(`<button class="btn ghost" id="back">Zurück</button><button class="btn" id="eval">Auswerten</button>`);
+      navEl.querySelector("#back").onclick = () => go("overview");
+      navEl.querySelector("#eval").onclick = () => go("result");
+      return;
+    }
+    if (S.screen === "result") {
+      const byBlock = {};
+      Object.keys(Q.blocks).forEach((b) => (byBlock[b] = { pts: 0, max: 0 }));
+      items.forEach((it) => { byBlock[it.block].pts += score(it); byBlock[it.block].max += it.points; });
+      const light = (b) => { const { pts } = byBlock[b]; const t = Q.blocks[b]; return pts >= t.green - 1e-9 ? "g" : pts >= t.yellow - 1e-9 ? "y" : "r"; };
+      const label = { g: "sitzt", y: "auffrischen", r: "hier ansetzen" };
+      app.innerHTML = `<h1>Deine Auswertung</h1>
+        <p>So sieht dein Stand in den einzelnen Themenblöcken aus. Mach dir ein Foto oder notiere dir deine Ampeln, denn beim Schließen der Seite ist das Ergebnis weg.</p>
+        <div class="lights">${Object.keys(Q.blocks).map((b) => { const L = light(b); const B = Q.blocks[b];
+          return `<div class="light ${L}"><span class="dot" aria-hidden="true"></span><div><h3>${esc(b)} · ${esc(B.name)}: ${label[L]}</h3>
+            <p class="small muted">${fmt(byBlock[b].pts)} von ${fmt(byBlock[b].max)} Punkten</p>
+            <p>${esc(Q.advice[L])}</p><p class="small"><strong>Das gehört dazu:</strong> ${esc(B.topics)}</p></div></div>`; }).join("")}</div>
+        <div class="note"><p><strong>Was bedeuten die Farben?</strong> Grün: Das Wissen sitzt. Gelb: Frische es mit dem Wissensspeicher auf. Rot: Hier fehlt noch Grundlagenwissen. Daran arbeiten wir im Unterricht gemeinsam, du bist damit nicht allein.</p></div>
+        <h2>Deine Antworten im Detail</h2>
+        ${items.map((it) => { const s = score(it); return `<div class="review"><div class="qhead"><span><span class="tag">${esc(it.block)}</span>Aufgabe ${esc(it.label)}</span><span class="res">${fmt(s)} / ${fmt(it.points)} P</span></div>
+          <p class="small">${it.prompt}</p><p class="sol"><strong>Lösung:</strong> ${esc(it.solution)}</p></div>`; }).join("")}`;
+      setNav(`<button class="btn ghost" id="print">Drucken / als PDF</button><button class="btn ghost" id="restart">Neu starten</button>`);
+      navEl.querySelector("#print").onclick = () => window.print();
+      navEl.querySelector("#restart").onclick = () => { S = { screen: "start", i: 0, ans: {}, self: {} }; render(); window.scrollTo(0, 0); };
+    }
+  }
+  render();
+})();
+</script>
+</body>
+</html>
